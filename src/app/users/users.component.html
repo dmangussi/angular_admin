@@ -1,0 +1,76 @@
+<div class="animated fadeIn">
+  <div class="row">
+    <div class="col-md-12">
+      <div class="card">
+        <div class="card-header">
+          Create a New User Account
+        </div>
+        <div class="card-block">
+          <alert *ngIf="successMessage" type="success" dismissible="true">
+            User added successfully.
+          </alert>
+          <alert *ngIf="errorMessage" type="danger" dismissible="true">
+            {{errorResponse}}
+          </alert>
+          <form class="form-horizontal"
+                [formGroup]="userForm"
+                (ngSubmit)="onSubmit()" >
+            <div class="form-group" [ngClass]="applyCSSError('name')" >
+                <input id="name-input"
+                       type="text"
+                       class="form-control form-control-danger"
+                       placeholder="User Name"
+                       formControlName="name">
+                <div-field-error *ngFor="let item of getFieldError('name')"
+                    [showError]="verifyValidTouched('name')"
+                    msgError={{item}}>
+                </div-field-error>
+            </div>
+            <div class="form-group" [ngClass]="applyCSSError('password')" >
+                <input id="password-input"
+                       type="password"
+                       class="form-control form-control-danger"
+                       placeholder="Password"
+                       formControlName="password">
+                <div-field-error *ngFor="let item of getFieldError('password')"
+                    [showError]="verifyValidTouched('password')"
+                    msgError={{item}}>
+                </div-field-error>
+            </div>
+            <div class="form-group" [ngClass]="applyCSSError('confirmPassword')" >
+                <input id="confirm-input"
+                       type="password"
+                       class="form-control form-control-danger"
+                       placeholder="Confirm Password"
+                       formControlName="confirmPassword">
+                <div-field-error *ngFor="let item of getFieldError('confirmPassword')"
+                    [showError]="verifyValidTouched('confirmPassword')"
+                    msgError={{item}}>
+                </div-field-error>
+            </div>
+            <div class="form-group row">
+              <label class="col-md-1 form-control-label">Rules:</label>
+              <div class="col-md-9">
+                <div class="checkbox">
+                  <label for="checkbox1">
+                    <input id="inline-checkbox-admin" type="checkbox" value="option1"> Admin
+                  </label>
+                  <label for="checkbox2">
+                    <input id="inline-checkbox2" type="checkbox" value="option2"> Normal
+                  </label>
+                  <label for="checkbox3">
+                    <input id="inline-checkbox3" type="checkbox" value="option3"> Guess
+                  </label>
+                </div>
+              </div>
+            </div>
+            <div class="form-actions">
+              <button type="submit" [disabled]="!userForm.valid" class="btn btn-primary">Submit</button>
+              <button type="button" (click)="resetForm()" class="btn btn-default">Cancel</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
