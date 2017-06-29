@@ -51,15 +51,11 @@
             <div class="form-group row">
               <label class="col-md-1 form-control-label">Rules:</label>
               <div class="col-md-9">
-                <div class="checkbox">
-                  <label for="checkbox1">
-                    <input id="inline-checkbox-admin" type="checkbox" value="option1"> Admin
-                  </label>
-                  <label for="checkbox2">
-                    <input id="inline-checkbox2" type="checkbox" value="option2"> Normal
-                  </label>
-                  <label for="checkbox3">
-                    <input id="inline-checkbox3" type="checkbox" value="option3"> Guess
+                <div class="checkbox" formArrayName="rules" *ngFor="let rule of rules; let i = index">
+                  <label>
+                    <span formGroupName="{{i}}">
+                      <input type="checkbox" [value]="rule.value" formControlName="{{rule.value}}">{{rule.description}}
+                    </span>
                   </label>
                 </div>
               </div>
